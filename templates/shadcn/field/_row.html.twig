@@ -1,0 +1,5 @@
+{#- Wraps a field with its label: context = { field, value, resource, options, content } -#}
+<div{{ rem42_sylius_ui_show_attributes(field, {class: 'flex flex-col gap-1'}) }}>
+    <div class="text-xs font-medium tracking-wide text-muted-foreground uppercase">{{ rem42_sylius_ui_show_label(field)|trans({}, field.translationDomain) }}</div>
+    <div class="min-w-0 break-words">{{ content }}</div>
+</div>

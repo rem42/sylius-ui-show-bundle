@@ -1,0 +1,11 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- elseif value matches '/^\\s*(javascript|data|vbscript):/i' -%}
+    {{ value }}
+{%- else -%}
+    {%- set file_label = field.labelProperty ? rem42_sylius_ui_show_value(resource, field.labelProperty) : value|split('/')|last -%}
+    <a href="{{ value }}" class="inline-flex max-w-full items-center gap-1.5 rounded-md border px-2 py-1 text-sm hover:bg-muted" title="{{ 'sylius.ui.download'|trans }}"{% if field.newTab %} target="_blank" rel="noopener noreferrer"{% endif %}>
+        {{ ux_icon('lucide:file', {class: 'size-4 shrink-0 text-muted-foreground', 'aria-hidden': 'true'}) }}
+        <span class="truncate">{{ file_label|rem42_sylius_ui_show_string }}</span>
+    </a>
+{%- endif -%}

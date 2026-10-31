@@ -1,0 +1,11 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/bootstrap/field/_empty.html.twig') }}
+{%- else -%}
+    {%- set percent = field.max > 0 ? min(100, max(0, value / field.max * 100))|round(1) : 0 -%}
+    <div class="d-flex align-items-center">
+        <div class="progress flex-grow-1 me-2" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="{{ field.max }}" aria-label="{{ percent }}%">
+            <div class="progress-bar{% if field.color %} bg-{{ field.color }}{% endif %}" style="width: {{ percent }}%"></div>
+        </div>
+        <span class="text-secondary small">{{ percent }}%</span>
+    </div>
+{%- endif -%}

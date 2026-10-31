@@ -1,0 +1,5 @@
+vendor/
+tests/Application/var/
+tests/Application/public/assets/
+tests/Application/assets/vendor/
+.git/

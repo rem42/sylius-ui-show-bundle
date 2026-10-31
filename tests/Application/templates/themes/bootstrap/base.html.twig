@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+        <title>{% block title %}Sylius UI Show Bundle demo{% endblock %}</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0/dist/css/tabler.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
+    </head>
+    <body>
+        <div class="page">
+            <div class="page-wrapper">
+                <div class="page-header">
+                    <div class="container-xl">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h1 class="page-title">{{ block('title') }}</h1>
+                            </div>
+                            {% if themes is defined %}
+                                <div class="col-auto">
+                                    <div class="btn-group" role="group" aria-label="Theme">
+                                        {% for theme, url in themes %}
+                                            <a href="{{ url }}" class="btn{{ theme == 'bootstrap' ? ' active' }}"{% if theme == 'bootstrap' %} aria-current="page"{% endif %}>{{ theme|capitalize }}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="page-body">
+                    <div class="container-xl">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0/dist/js/tabler.min.js"></script>
+    </body>
+</html>

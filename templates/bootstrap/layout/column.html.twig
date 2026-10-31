@@ -1,0 +1,14 @@
+{%- set width = element.width -%}
+{%- set breakpoint = element.breakpoint -%}
+{%- if breakpoint is same as('') -%}
+    {%- set column_class = 'col-' ~ width -%}
+{%- elseif width == 12 -%}
+    {%- set column_class = 'col-12' -%}
+{%- else -%}
+    {%- set column_class = 'col-12 col-' ~ breakpoint ~ '-' ~ width -%}
+{%- endif -%}
+<div{{ rem42_sylius_ui_show_attributes(element, {class: column_class}) }}>
+    {%- for child in element.children -%}
+        {{ rem42_sylius_ui_show_render(child, resource) }}
+    {%- endfor -%}
+</div>

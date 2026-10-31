@@ -1,0 +1,6 @@
+sylius_twig_hooks:
+    hooks:
+        # Rendered by the Hook element of App\Show\ProductShow, template of the current theme (templates/themes/{theme}/).
+        'app.product.show.promotion':
+            promotion:
+                template: 'hook/promotion.html.twig'

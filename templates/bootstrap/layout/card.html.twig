@@ -1,0 +1,18 @@
+<div{{ rem42_sylius_ui_show_attributes(element, {class: 'card mb-3'}) }}>
+    {%- if element.hasHeader %}
+        <div class="card-header">
+            <h3 class="card-title">{{ rem42_sylius_ui_show_label(element)|trans({}, element.translationDomain) }}</h3>
+        </div>
+    {%- endif %}
+    <div class="card-body{% if element.flush %} p-0{% endif %} {{ element.bodyClass }}">
+        <div class="row">
+            {%- for child in element.children -%}
+                {%- if child.type == 'column' -%}
+                    {{ rem42_sylius_ui_show_render(child, resource) }}
+                {%- else -%}
+                    <div class="col-12">{{ rem42_sylius_ui_show_render(child, resource) }}</div>
+                {%- endif -%}
+            {%- endfor -%}
+        </div>
+    </div>
+</div>

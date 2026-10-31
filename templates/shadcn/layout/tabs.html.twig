@@ -1,0 +1,22 @@
+{#- Horizontal tabs inside a card, driven by the admin--tabs controller. -#}
+{%- set id_prefix = 'rem42-sylius-ui-show-tabs-' ~ element.name|replace({' ': '-', '.': '-'}) -%}
+<div{{ rem42_sylius_ui_show_attributes(element, {class: 'flex flex-col gap-4 overflow-hidden rounded-xl bg-card pb-4 text-sm text-card-foreground ring-1 ring-foreground/10', 'data-controller': 'admin--tabs'}) }}>
+    <div role="tablist" class="flex gap-1 overflow-x-auto border-b px-2 pt-2">
+        {%- for tab in element.children %}
+            {%- set panel_id = id_prefix ~ '-' ~ loop.index %}
+            <button type="button" role="tab" id="{{ panel_id }}-tab" aria-controls="{{ panel_id }}"
+                    aria-selected="{{ loop.first ? 'true' : 'false' }}" tabindex="{{ loop.first ? '0' : '-1' }}"
+                    data-active="{{ loop.first ? 'true' : 'false' }}" data-state="{{ loop.first ? 'active' : 'inactive' }}"
+                    data-admin--tabs-target="tab" data-action="admin--tabs#select keydown->admin--tabs#keydown"
+                    class="-mb-px shrink-0 cursor-pointer border-b-2 border-transparent px-3 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 data-[state=active]:border-primary data-[state=active]:text-foreground">
+                {{- rem42_sylius_ui_show_label(tab)|trans({}, tab.translationDomain) -}}
+            </button>
+        {%- endfor %}
+    </div>
+    {%- for tab in element.children %}
+        <div id="{{ id_prefix }}-{{ loop.index }}" role="tabpanel" aria-labelledby="{{ id_prefix }}-{{ loop.index }}-tab" tabindex="0"
+             data-admin--tabs-target="panel" class="px-4 outline-none"{% if not loop.first %} hidden{% endif %}>
+            {{- rem42_sylius_ui_show_render(tab, resource) -}}
+        </div>
+    {%- endfor %}
+</div>

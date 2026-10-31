@@ -1,0 +1,15 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/bootstrap/field/_empty.html.twig') }}
+{%- else -%}
+    {#- Backed enums are mapped by value, pure enums by case name, scalars as is -#}
+    {%- set key = value.value ?? value.name ?? value -%}
+    {%- set label = field.choices[key] ?? value.name ?? value -%}
+    {%- set label = field.translatable ? label|trans({}, field.translationDomain) : label -%}
+    {%- set badge = field.badge -%}
+    {%- if badge is same as(false) -%}
+        {{- label -}}
+    {%- else -%}
+        {%- set color = badge is iterable ? (badge[key] ?? 'secondary') : 'secondary' -%}
+        <span class="badge bg-{{ color }}-lt">{{ label }}</span>
+    {%- endif -%}
+{%- endif -%}

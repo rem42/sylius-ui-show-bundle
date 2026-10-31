@@ -1,0 +1,6 @@
+framework:
+    asset_mapper:
+        paths:
+            - assets/
+        # Served by the shadcn kernel, mounted on /shadcn (see public/index.php).
+        public_prefix: /shadcn/assets/

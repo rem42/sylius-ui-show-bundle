@@ -1,0 +1,11 @@
+framework:
+    secret: "%secret%"
+    default_locale: "%locale%"
+    translator: { fallbacks: ["%locale%"] }
+    property_info: { enabled: true }
+    http_method_override: false
+    form: false
+
+when@test:
+    framework:
+        test: true

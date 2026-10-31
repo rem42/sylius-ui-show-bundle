@@ -1,0 +1,6 @@
+{#- Root of a show: context = { element: ShowBuilder, resource, options } -#}
+<div{{ rem42_sylius_ui_show_attributes(element, {class: 'rem42-sylius-ui-show', 'data-show': element.name}) }}>
+    {%- for child in element.children -%}
+        {{ rem42_sylius_ui_show_render(child, resource) }}
+    {%- endfor -%}
+</div>

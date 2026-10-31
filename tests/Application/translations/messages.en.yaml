@@ -1,0 +1,18 @@
+app:
+    ui:
+        name: Name
+        description: Description
+        price: Price
+        status: Status
+        published_at: Published at
+        status_enum: Status (enum)
+        is_published: Published
+        tags: Tags
+        variants: Variants
+        category: Category
+
+# Labels of the BooleanField, provided by sylius/ui-translations in a Sylius application.
+sylius:
+    ui:
+        'yes': 'Yes'
+        'no': 'No'

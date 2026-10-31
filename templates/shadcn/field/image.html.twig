@@ -1,0 +1,15 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- else -%}
+    {%- set src = (field.basePath ?? '') ~ value -%}
+    {%- set shape = {circle: ' rounded-full', rounded: ' rounded-md', square: ' rounded-none'}[field.shape] ?? ' rounded-md' -%}
+    {%- set dimension = {xs: ' size-6', sm: ' size-8', md: ' size-12', lg: ' size-16', xl: ' size-24'}[field.size] ?? ' size-10' -%}
+    {%- set image -%}
+        <img src="{{ src }}" alt="{{ rem42_sylius_ui_show_label(field)|trans({}, field.translationDomain) }}" class="object-cover{{ dimension }}{{ shape }}" loading="lazy">
+    {%- endset -%}
+    {%- if field.lightbox -%}
+        <a href="{{ src }}" target="_blank" rel="noopener noreferrer" class="inline-block">{{ image }}</a>
+    {%- else -%}
+        {{ image }}
+    {%- endif -%}
+{%- endif -%}

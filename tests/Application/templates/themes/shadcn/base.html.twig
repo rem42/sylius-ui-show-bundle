@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+        <title>{% block title %}Sylius UI Show Bundle demo{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('styles/admin.css') }}">
+        {{ importmap('admin') }}
+    </head>
+    <body class="min-h-svh bg-background font-sans text-foreground antialiased">
+        <header class="border-b bg-card">
+            <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-6">
+                <h1 class="text-2xl font-semibold tracking-tight">{{ block('title') }}</h1>
+                {% if themes is defined %}
+                    <nav class="inline-flex rounded-lg bg-muted p-1" aria-label="Theme">
+                        {% for theme, url in themes %}
+                            <a href="{{ url }}"{% if theme == 'shadcn' %} aria-current="page"{% endif %}
+                               class="rounded-md px-3 py-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:bg-background aria-[current=page]:text-foreground aria-[current=page]:shadow-sm">{{ theme|capitalize }}</a>
+                        {% endfor %}
+                    </nav>
+                {% endif %}
+            </div>
+        </header>
+        <main class="mx-auto max-w-7xl px-4 py-6">
+            {% block content %}{% endblock %}
+        </main>
+    </body>
+</html>

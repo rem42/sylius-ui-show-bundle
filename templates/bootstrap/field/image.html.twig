@@ -1,0 +1,14 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/bootstrap/field/_empty.html.twig') }}
+{%- else -%}
+    {%- set src = (field.basePath ?? '') ~ value -%}
+    {%- set shape = {circle: ' rounded-circle', rounded: ' rounded', square: ' rounded-0'}[field.shape] ?? '' -%}
+    {%- set image -%}
+        <img src="{{ src }}" alt="{{ rem42_sylius_ui_show_label(field)|trans({}, field.translationDomain) }}" class="avatar{% if field.size %} avatar-{{ field.size }}{% endif %}{{ shape }}" style="object-fit: cover;" loading="lazy">
+    {%- endset -%}
+    {%- if field.lightbox -%}
+        <a href="{{ src }}" target="_blank" rel="noopener noreferrer">{{ image }}</a>
+    {%- else -%}
+        {{ image }}
+    {%- endif -%}
+{%- endif -%}

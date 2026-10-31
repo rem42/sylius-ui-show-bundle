@@ -1,0 +1,11 @@
+{%- if value is null -%}
+    {{ include('@Rem42SyliusUiShow/bootstrap/field/_empty.html.twig') }}
+{%- elseif field.hasBadge -%}
+    {%- if value -%}
+        <span class="badge bg-success-lt">{{ 'sylius.ui.yes'|trans }}</span>
+    {%- else -%}
+        <span class="badge bg-danger-lt">{{ 'sylius.ui.no'|trans }}</span>
+    {%- endif -%}
+{%- else -%}
+    {{- (value ? 'sylius.ui.yes' : 'sylius.ui.no')|trans -}}
+{%- endif -%}

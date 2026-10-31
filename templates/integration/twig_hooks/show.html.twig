@@ -1,0 +1,18 @@
+{#-
+    Hookable registered on "sylius_admin.common.show.content" (see "rem42_sylius_ui_show.twig_hooks").
+    Renders the show supporting the current resource, or the one named in the hookable configuration:
+
+        sylius_twig_hooks:
+            hooks:
+                'sylius_admin.product.show.content':
+                    rem42_sylius_ui_show:
+                        template: '@Rem42SyliusUiShow/integration/twig_hooks/show.html.twig'
+                        configuration:
+                            show: 'app_product'
+-#}
+{%- set resource = hookable_metadata.context.resource ?? null -%}
+{%- set show_name = hookable_metadata.configuration.show ?? null -%}
+{%- if rem42_sylius_ui_show_exists(resource, show_name) -%}
+    {#- The page wrapper depends on the theme (template type "twig_hooks") -#}
+    {{- include(rem42_sylius_ui_show_template('twig_hooks'), {resource: resource, show_name: show_name}, false) -}}
+{%- endif -%}

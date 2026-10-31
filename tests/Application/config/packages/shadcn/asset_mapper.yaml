@@ -1,0 +1,4 @@
+imports:
+    # TwigBundle only registers the importmap() function when symfony/asset-mapper is a "require" dependency:
+    # in this repository it is a "require-dev" one (through rem42/shadcn-admin-ui).
+    - { resource: '@TwigBundle/Resources/config/importmap.php' }

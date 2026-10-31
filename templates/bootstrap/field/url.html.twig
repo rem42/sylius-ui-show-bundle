@@ -1,0 +1,10 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/bootstrap/field/_empty.html.twig') }}
+{%- else -%}
+    {%- set label = field.labelProperty ? rem42_sylius_ui_show_value(resource, field.labelProperty) : value -%}
+    {%- if value matches '/^\\s*(javascript|data|vbscript):/i' -%}
+        {{ value }}
+    {%- else -%}
+        <a href="{{ value }}"{% if field.newTab %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ label|rem42_sylius_ui_show_string }}</a>
+    {%- endif -%}
+{%- endif -%}

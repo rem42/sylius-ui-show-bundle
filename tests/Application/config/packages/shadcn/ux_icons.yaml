@@ -1,0 +1,6 @@
+when@test:
+    ux_icons:
+        # No call to the Iconify API from the tests.
+        iconify:
+            enabled: false
+        ignore_not_found: true

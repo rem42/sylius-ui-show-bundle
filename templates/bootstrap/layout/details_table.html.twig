@@ -1,0 +1,13 @@
+<div class="table-responsive">
+    <table{{ rem42_sylius_ui_show_attributes(element, {class: 'table table-vcenter table-striped mb-3'}) }}>
+        <tbody>
+            {%- for child in element.children %}
+                {%- set label = rem42_sylius_ui_show_label(child)|trans({}, child.translationDomain) %}
+                <tr>
+                    <th scope="row" class="text-truncate" style="width: {{ element.labelWidth }}; max-width: {{ element.labelWidth }};" title="{{ label }}">{{ label }}</th>
+                    <td>{{ rem42_sylius_ui_show_render(child, resource, {render_label: false}) }}</td>
+                </tr>
+            {%- endfor %}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,35 @@
+{#- Vertical tabs, driven by the admin--tabs controller (assets/controllers/admin/tabs_controller.js). -#}
+{%- set id_prefix = 'rem42-sylius-ui-show-side-nav-' ~ element.name|replace({' ': '-', '.': '-'}) -%}
+{%- set items = element.children|filter(item => item.type != 'side_nav_divider') -%}
+{%- set active = items|first -%}
+<div{{ rem42_sylius_ui_show_attributes(element, {class: 'grid gap-4 lg:grid-cols-[14rem_minmax(0,1fr)]', 'data-controller': 'admin--tabs'}) }}>
+    <nav class="lg:sticky lg:top-20 lg:self-start" aria-label="Sections">
+        <div role="tablist" aria-orientation="vertical" class="flex gap-1 overflow-x-auto rounded-xl bg-card p-1 ring-1 ring-foreground/10 lg:flex-col lg:overflow-visible">
+            {%- for item in element.children %}
+                {%- if item.type == 'side_nav_divider' %}
+                    {{ rem42_sylius_ui_show_render(item, resource) }}
+                {%- else %}
+                    {%- set is_active = item is same as(active) %}
+                    {%- set panel_id = id_prefix ~ '-' ~ loop.index %}
+                    <button type="button" role="tab" id="{{ panel_id }}-tab" aria-controls="{{ panel_id }}"
+                            aria-selected="{{ is_active ? 'true' : 'false' }}" tabindex="{{ is_active ? '0' : '-1' }}"
+                            data-active="{{ is_active ? 'true' : 'false' }}" data-state="{{ is_active ? 'active' : 'inactive' }}"
+                            data-admin--tabs-target="tab" data-action="admin--tabs#select keydown->admin--tabs#keydown"
+                            class="group/tab flex shrink-0 cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-start text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 data-[state=active]:bg-muted data-[state=active]:text-foreground data-[invalid=true]:text-destructive lg:w-full">
+                        {{- rem42_sylius_ui_show_label(item)|trans({}, item.translationDomain) -}}
+                    </button>
+                {%- endif %}
+            {%- endfor %}
+        </div>
+    </nav>
+    <div class="min-w-0">
+        {%- for item in element.children %}
+            {%- if item.type != 'side_nav_divider' %}
+                <div id="{{ id_prefix }}-{{ loop.index }}" role="tabpanel" aria-labelledby="{{ id_prefix }}-{{ loop.index }}-tab" tabindex="0"
+                     data-admin--tabs-target="panel" class="flex flex-col gap-4 rounded-xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"{% if item is not same as(active) %} hidden{% endif %}>
+                    {{- rem42_sylius_ui_show_render(item, resource) -}}
+                </div>
+            {%- endif %}
+        {%- endfor %}
+    </div>
+</div>

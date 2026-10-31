@@ -1,0 +1,36 @@
+{%- macro item(field, item) -%}
+    {%- set label = field.labelProperty ? rem42_sylius_ui_show_value(item, field.labelProperty) : item -%}
+    {%- if field.route -%}
+        {%- set parameters = {} -%}
+        {%- for parameter, path in field.routeParameters -%}
+            {%- set parameters = parameters|merge({(parameter): rem42_sylius_ui_show_value(item, path)}) -%}
+        {%- endfor -%}
+        <a href="{{ path(field.route, parameters) }}" class="font-medium hover:underline">{{ label|rem42_sylius_ui_show_string }}</a>
+    {%- else -%}
+        {{- label|rem42_sylius_ui_show_string -}}
+    {%- endif -%}
+{%- endmacro -%}
+{%- import _self as association -%}
+
+{%- if value is null or value is empty -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- elseif value is not iterable -%}
+    {{- association.item(field, value) -}}
+{%- elseif field.displayMode == 'list' -%}
+    <ul class="flex flex-col gap-1">
+        {%- for item in value -%}
+            <li>{{ association.item(field, item) }}</li>
+        {%- endfor -%}
+    </ul>
+{%- elseif field.displayMode == 'badge' -%}
+    <div class="flex flex-wrap gap-1">
+        {%- for item in value -%}
+            {%- set item_html = association.item(field, item) -%}
+            <twig:shadcn_admin_ui:badge :color="field.badgeColor">{{ item_html }}</twig:shadcn_admin_ui:badge>
+        {%- endfor -%}
+    </div>
+{%- else -%}
+    {%- for item in value -%}
+        {{ association.item(field, item) }}{% if not loop.last %}, {% endif %}
+    {%- endfor -%}
+{%- endif -%}

@@ -1,0 +1,30 @@
+{%- if value is null or value is empty -%}
+    <div class="text-secondary">{{ field.emptyMessage|trans }}</div>
+{%- elseif field.columns is empty -%}
+    <ul class="list-unstyled mb-0">
+        {%- for item in value -%}
+            <li>{{ item|rem42_sylius_ui_show_string }}</li>
+        {%- endfor -%}
+    </ul>
+{%- else -%}
+    <div class="table-responsive">
+        <table class="table table-vcenter card-table mb-0">
+            <thead>
+                <tr>
+                    {%- for column in field.columns %}
+                        <th>{{ rem42_sylius_ui_show_label(column)|trans({}, column.translationDomain) }}</th>
+                    {%- endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {%- for item in value %}
+                    <tr>
+                        {%- for column in field.columns %}
+                            <td>{{ rem42_sylius_ui_show_render(column, item, {render_label: false}) }}</td>
+                        {%- endfor %}
+                    </tr>
+                {%- endfor %}
+            </tbody>
+        </table>
+    </div>
+{%- endif -%}

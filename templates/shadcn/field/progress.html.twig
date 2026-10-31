@@ -1,0 +1,13 @@
+{%- from '@Rem42ShadcnAdminUi/shared/helper/palette.html.twig' import tone -%}
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- else -%}
+    {%- set percent = field.max > 0 ? min(100, max(0, value / field.max * 100))|round(1) : 0 -%}
+    {%- set bar_class = field.color ? tone(field.color, 'dot')|trim : 'bg-primary' -%}
+    <div class="flex items-center gap-2">
+        <div class="h-1.5 flex-1 overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="{{ field.max }}" aria-label="{{ percent }}%">
+            <div class="h-full rounded-full {{ bar_class }}" style="width: {{ percent }}%"></div>
+        </div>
+        <span class="text-xs text-muted-foreground tabular-nums">{{ percent }}%</span>
+    </div>
+{%- endif -%}

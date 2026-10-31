@@ -1,0 +1,32 @@
+{%- set id_prefix = 'rem42-sylius-ui-show-side-nav-' ~ element.name|replace({' ': '-', '.': '-'}) -%}
+{%- set items = element.children|filter(item => item.type != 'side_nav_divider') -%}
+{%- set active = items|first -%}
+<div{{ rem42_sylius_ui_show_attributes(element, {class: 'row'}) }}>
+    <div class="col-12 col-lg-3">
+        <div class="sticky-lg-top mb-3" style="top: 1rem;">
+            <div class="list-group" role="tablist">
+                {%- for item in element.children %}
+                    {%- if item.type == 'side_nav_divider' %}
+                        {{ rem42_sylius_ui_show_render(item, resource) }}
+                    {%- else %}
+                        {%- set is_active = item is same as(active) %}
+                        <button type="button" class="list-group-item list-group-item-action{% if is_active %} active{% endif %}" data-bs-toggle="tab" data-bs-target="#{{ id_prefix }}-{{ loop.index }}" role="tab" aria-controls="{{ id_prefix }}-{{ loop.index }}" aria-selected="{{ is_active ? 'true' : 'false' }}"{% if not is_active %} tabindex="-1"{% endif %}>
+                            {{- rem42_sylius_ui_show_label(item)|trans({}, item.translationDomain) -}}
+                        </button>
+                    {%- endif %}
+                {%- endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-9">
+        <div class="tab-content">
+            {%- for item in element.children %}
+                {%- if item.type != 'side_nav_divider' %}
+                    <div class="tab-pane{% if item is same as(active) %} show active{% endif %}" id="{{ id_prefix }}-{{ loop.index }}" role="tabpanel" tabindex="0">
+                        {{- rem42_sylius_ui_show_render(item, resource) -}}
+                    </div>
+                {%- endif %}
+            {%- endfor %}
+        </div>
+    </div>
+</div>

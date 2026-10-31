@@ -1,0 +1,14 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- elseif field.mode == 'mask' -%}
+    {%- set text = value|rem42_sylius_ui_show_string -%}
+    {%- set visible = min(field.visible, text|length) -%}
+    {%- set hidden = text|length - visible -%}
+    <span class="font-mono">
+        {%- if hidden > 0 %}{% for i in 1..hidden %}{{ field.char }}{% endfor %}{% endif -%}
+        {{- visible > 0 ? text|slice(hidden) : '' -}}
+    </span>
+{%- else -%}
+    {#- Blur removed on hover or keyboard focus; no transition when the user reduces motion. -#}
+    <span class="inline-block cursor-pointer rounded-sm blur-(--rem42-sylius-ui-show-blur) transition-[filter] duration-300 outline-none hover:blur-none focus-visible:blur-none focus-visible:ring-3 focus-visible:ring-ring/50 motion-reduce:transition-none" style="--rem42-sylius-ui-show-blur: {{ field.blurRadius }};" tabindex="0">{{ value|rem42_sylius_ui_show_string }}</span>
+{%- endif -%}

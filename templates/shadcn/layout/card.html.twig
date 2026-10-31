@@ -1,0 +1,21 @@
+{#- Flush card (edge-to-edge content, e.g. a DetailsTable): no padding, the content is separated from the header by a border. -#}
+{%- set flush = element.flush -%}
+{%- set padding = not flush ? 'py-4' : (element.hasHeader ? 'pt-4' : '') -%}
+<div{{ rem42_sylius_ui_show_attributes(element, {class: 'flex flex-col gap-4 overflow-hidden rounded-xl bg-card text-sm text-card-foreground ring-1 ring-foreground/10 ' ~ padding, 'data-slot': 'card'}) }}>
+    {%- if element.hasHeader %}
+        <div class="px-4" data-slot="card-header">
+            <h3 class="text-base leading-snug font-medium" data-slot="card-title">{{ rem42_sylius_ui_show_label(element)|trans({}, element.translationDomain) }}</h3>
+        </div>
+    {%- endif %}
+    <div class="{{ flush ? (element.hasHeader ? 'border-t' : '') : 'px-4' }} {{ element.bodyClass }}" data-slot="card-content">
+        <div class="grid grid-cols-12 gap-4">
+            {%- for child in element.children -%}
+                {%- if child.type == 'column' -%}
+                    {{ rem42_sylius_ui_show_render(child, resource) }}
+                {%- else -%}
+                    <div class="col-span-12 min-w-0">{{ rem42_sylius_ui_show_render(child, resource) }}</div>
+                {%- endif -%}
+            {%- endfor -%}
+        </div>
+    </div>
+</div>

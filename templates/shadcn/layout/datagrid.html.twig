@@ -1,0 +1,8 @@
+<dl{{ rem42_sylius_ui_show_attributes(element, {class: 'grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3'}) }}>
+    {%- for child in element.children %}
+        <div class="flex min-w-0 flex-col gap-1">
+            <dt class="text-xs font-medium tracking-wide text-muted-foreground uppercase">{{ rem42_sylius_ui_show_label(child)|trans({}, child.translationDomain) }}</dt>
+            <dd class="min-w-0 text-sm break-words">{{ rem42_sylius_ui_show_render(child, resource, {render_label: false}) }}</dd>
+        </div>
+    {%- endfor %}
+</dl>

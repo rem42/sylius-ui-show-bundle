@@ -1,0 +1,9 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- elseif field.svgAllowed and '<svg' in value -%}
+    {{ value|raw }}
+{%- elseif ':' in value -%}
+    {{ ux_icon(value, {class: 'size-4', 'aria-hidden': 'true'}) }}
+{%- else -%}
+    <i class="{{ value }}" aria-hidden="true"></i>
+{%- endif -%}

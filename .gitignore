@@ -1,0 +1,21 @@
+/vendor/
+/composer.phar
+/composer.lock
+
+/phpstan.neon
+/phpunit.xml
+
+/.phpunit.cache/
+/.phpunit.result.cache
+
+/tests/Functional/Application/var/
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> vincentlanglet/twig-cs-fixer ###
+/.twig-cs-fixer.cache
+###< vincentlanglet/twig-cs-fixer ###
+

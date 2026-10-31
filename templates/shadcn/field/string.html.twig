@@ -1,0 +1,9 @@
+{%- if value is null or value is same as('') or (value is iterable and value is empty) -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- else -%}
+    {%- set text = value|rem42_sylius_ui_show_string -%}
+    {%- if field.maxLength is not null and text|length > field.maxLength -%}
+        {%- set text = text|slice(0, field.maxLength) ~ '…' -%}
+    {%- endif -%}
+    {%- if field.multiline -%}{{ text|nl2br }}{%- else -%}{{ text }}{%- endif -%}
+{%- endif -%}

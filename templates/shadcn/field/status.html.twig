@@ -1,0 +1,11 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- else -%}
+    {%- set key = value.value ?? value.name ?? value -%}
+    {%- set dot_color = field.colorMapping[key] ?? 'secondary' -%}
+    {%- set status_text = value|rem42_sylius_ui_show_string -%}
+    <span class="inline-flex items-center gap-1.5">
+        <twig:shadcn_admin_ui:dot :color="dot_color" :pulse="field.animated" />
+        {{ status_text }}
+    </span>
+{%- endif -%}

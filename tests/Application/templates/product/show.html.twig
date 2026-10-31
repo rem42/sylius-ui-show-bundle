@@ -1,0 +1,8 @@
+{#- base.html.twig of the current theme: templates/themes/{theme}/ -#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    {{ rem42_sylius_ui_show(product) }}
+{% endblock %}

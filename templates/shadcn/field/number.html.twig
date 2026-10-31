@@ -1,0 +1,7 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- else -%}
+    {{- field.prefix -}}
+    {{- field.decimals is not null ? value|number_format(field.decimals) : value -}}
+    {{- field.suffix -}}
+{%- endif -%}

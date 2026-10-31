@@ -1,0 +1,11 @@
+{%- if value is null -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- elseif field.hasBadge -%}
+    {%- if value -%}
+        <twig:shadcn_admin_ui:badge color="success">{{ 'sylius.ui.yes'|trans }}</twig:shadcn_admin_ui:badge>
+    {%- else -%}
+        <twig:shadcn_admin_ui:badge color="danger">{{ 'sylius.ui.no'|trans }}</twig:shadcn_admin_ui:badge>
+    {%- endif -%}
+{%- else -%}
+    {{- (value ? 'sylius.ui.yes' : 'sylius.ui.no')|trans -}}
+{%- endif -%}

@@ -1,0 +1,5 @@
+{%- set product = hookable_metadata.context.resource -%}
+<twig:shadcn:Alert>
+    <twig:shadcn:Alert:Title>Rendered by a Twig hook</twig:shadcn:Alert:Title>
+    <twig:shadcn:Alert:Description>Hookable of "{{ hookable_metadata.context.element.hookName }}": spring sale on {{ product.name }}.</twig:shadcn:Alert:Description>
+</twig:shadcn:Alert>

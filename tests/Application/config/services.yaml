@@ -1,0 +1,16 @@
+parameters:
+    locale: en
+    secret: "Three can keep a secret, if two of them are dead."
+    database_url: "sqlite:///%kernel.project_dir%/var/data.db"
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Entity/'
+            - '../src/Enum/'
+            - '../src/Kernel.php'

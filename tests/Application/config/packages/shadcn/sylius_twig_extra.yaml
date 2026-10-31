@@ -1,0 +1,4 @@
+imports:
+    # Prefixes of the anonymous components: <twig:shadcn_admin_ui:badge>, <twig:shadcn:Card>...
+    # The whole "@Rem42ShadcnAdminUiBundle/config/app.php" also configures the admin panel (grids, page hooks) this demo does not use.
+    - { resource: '@Rem42ShadcnAdminUiBundle/config/app/twig_extra/twig_ux.php' }

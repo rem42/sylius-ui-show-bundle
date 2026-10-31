@@ -1,0 +1,9 @@
+# The navbar user dropdown of rem42/shadcn-admin-ui needs the security token storage and the admin routing of
+# sylius/admin-ui: the demo renders no admin panel, so neither a login nor SyliusAdminUiBundle is needed.
+parameters:
+    sylius_admin_ui.routing: []
+
+security:
+    firewalls:
+        main:
+            security: false

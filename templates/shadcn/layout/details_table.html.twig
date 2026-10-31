@@ -1,0 +1,13 @@
+<div class="overflow-x-auto">
+    <table{{ rem42_sylius_ui_show_attributes(element, {class: 'w-full text-sm'}) }}>
+        <tbody class="[&_tr:last-child]:border-0">
+            {%- for child in element.children %}
+                {%- set label = rem42_sylius_ui_show_label(child)|trans({}, child.translationDomain) %}
+                <tr class="border-b">
+                    <th scope="row" class="truncate px-4 py-2.5 text-start align-top font-normal text-muted-foreground" style="width: {{ element.labelWidth }}; max-width: {{ element.labelWidth }};" title="{{ label }}">{{ label }}</th>
+                    <td class="min-w-0 px-4 py-2.5 break-words">{{ rem42_sylius_ui_show_render(child, resource, {render_label: false}) }}</td>
+                </tr>
+            {%- endfor %}
+        </tbody>
+    </table>
+</div>

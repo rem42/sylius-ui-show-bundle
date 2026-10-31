@@ -1,0 +1,15 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- else -%}
+    {#- Backed enums are mapped by value, pure enums by case name, scalars as is -#}
+    {%- set key = value.value ?? value.name ?? value -%}
+    {%- set enum_label = field.choices[key] ?? value.name ?? value -%}
+    {%- set enum_label = field.translatable ? enum_label|trans({}, field.translationDomain) : enum_label -%}
+    {%- set badge = field.badge -%}
+    {%- if badge is same as(false) -%}
+        {{- enum_label -}}
+    {%- else -%}
+        {%- set badge_color = badge is iterable ? (badge[key] ?? 'secondary') : 'secondary' -%}
+        <twig:shadcn_admin_ui:badge :color="badge_color">{{ enum_label }}</twig:shadcn_admin_ui:badge>
+    {%- endif -%}
+{%- endif -%}

@@ -1,0 +1,10 @@
+{%- if value is null or value is same as('') -%}
+    {{ include('@Rem42SyliusUiShow/shadcn/field/_empty.html.twig') }}
+{%- else -%}
+    {%- set label = field.labelProperty ? rem42_sylius_ui_show_value(resource, field.labelProperty) : value -%}
+    {%- if value matches '/^\\s*(javascript|data|vbscript):/i' -%}
+        {{ value }}
+    {%- else -%}
+        <a href="{{ value }}" class="text-primary underline-offset-4 hover:underline"{% if field.newTab %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ label|rem42_sylius_ui_show_string }}</a>
+    {%- endif -%}
+{%- endif -%}

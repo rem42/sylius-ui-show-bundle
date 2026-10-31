@@ -1,0 +1,33 @@
+{%- macro item(field, item) -%}
+    {%- set label = field.labelProperty ? rem42_sylius_ui_show_value(item, field.labelProperty) : item -%}
+    {%- if field.route -%}
+        {%- set parameters = {} -%}
+        {%- for parameter, path in field.routeParameters -%}
+            {%- set parameters = parameters|merge({(parameter): rem42_sylius_ui_show_value(item, path)}) -%}
+        {%- endfor -%}
+        <a href="{{ path(field.route, parameters) }}">{{ label|rem42_sylius_ui_show_string }}</a>
+    {%- else -%}
+        {{- label|rem42_sylius_ui_show_string -}}
+    {%- endif -%}
+{%- endmacro -%}
+{%- import _self as association -%}
+
+{%- if value is null or value is empty -%}
+    {{ include('@Rem42SyliusUiShow/bootstrap/field/_empty.html.twig') }}
+{%- elseif value is not iterable -%}
+    {{- association.item(field, value) -}}
+{%- elseif field.displayMode == 'list' -%}
+    <ul class="list-unstyled mb-0">
+        {%- for item in value -%}
+            <li>{{ association.item(field, item) }}</li>
+        {%- endfor -%}
+    </ul>
+{%- elseif field.displayMode == 'badge' -%}
+    {%- for item in value -%}
+        <span class="badge bg-{{ field.badgeColor }}-lt me-1">{{ association.item(field, item) }}</span>
+    {%- endfor -%}
+{%- else -%}
+    {%- for item in value -%}
+        {{ association.item(field, item) }}{% if not loop.last %}, {% endif %}
+    {%- endfor -%}
+{%- endif -%}

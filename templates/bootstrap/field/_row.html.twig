@@ -1,0 +1,5 @@
+{#- Wraps a field with its label: context = { field, value, resource, options, content } -#}
+<div{{ rem42_sylius_ui_show_attributes(field, {class: 'mb-3'}) }}>
+    <div class="form-label">{{ rem42_sylius_ui_show_label(field)|trans({}, field.translationDomain) }}</div>
+    <div>{{ content }}</div>
+</div>

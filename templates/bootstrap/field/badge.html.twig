@@ -1,0 +1,12 @@
+{%- if value is null or value is same as('') or (value is iterable and value is empty) -%}
+    {{ include('@Rem42SyliusUiShow/bootstrap/field/_empty.html.twig') }}
+{%- else -%}
+    {%- for item in (value is iterable ? value : [value]) -%}
+        {%- set key = item.value ?? item.name ?? item -%}
+        {%- set color = field.colorMapping[key] ?? field.defaultColor -%}
+        {%- set classes = ['badge'] -%}
+        {%- set classes = classes|merge(field.outline ? ['badge-outline', 'text-' ~ color] : ['bg-' ~ color, 'text-' ~ color ~ '-fg']) -%}
+        {%- set classes = field.pill ? classes|merge(['badge-pill']) : classes -%}
+        <span class="{{ classes|join(' ') }}{% if not loop.last %} me-1{% endif %}">{{ item|rem42_sylius_ui_show_string }}</span>
+    {%- endfor -%}
+{%- endif -%}

@@ -1,0 +1,8 @@
+<div{{ rem42_sylius_ui_show_attributes(element, {class: 'datagrid mb-3'}) }}>
+    {%- for child in element.children %}
+        <div class="datagrid-item">
+            <div class="datagrid-title">{{ rem42_sylius_ui_show_label(child)|trans({}, child.translationDomain) }}</div>
+            <div class="datagrid-content">{{ rem42_sylius_ui_show_render(child, resource, {render_label: false}) }}</div>
+        </div>
+    {%- endfor %}
+</div>

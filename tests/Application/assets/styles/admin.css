@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "../../../../vendor/rem42/shadcn-admin-ui/assets/styles/theme.css";
+
+/* Templates of the "shadcn" theme of the bundle and of the demo. */
+@source "../../../../templates/shadcn";
+@source "../../templates";
