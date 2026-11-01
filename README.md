@@ -101,8 +101,8 @@ final class BookShow
 make install   # composer install
 make ci        # ECS + PHPStan (level max) + PHPUnit
 make up        # demo application showcasing every element, in both themes:
-               # http://localhost:8080/admin/show/product/1 (bootstrap)
-               # http://localhost:8080/shadcn/admin/show/product/1 (shadcn)
+               # http://localhost:8080/ (bootstrap)
+               # http://localhost:8080/shadcn/ (shadcn)
 ```
 
 The demo application lives in `tests/Application` (`App\Show\ProductShow` is a good tour of the API). Each theme runs

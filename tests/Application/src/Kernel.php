@@ -11,8 +11,8 @@ use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 /**
  * Demo application showcasing every element of the bundle, once per theme (see docker-compose.yml):
- * - bootstrap: http://localhost:8081/admin/show/product/1
- * - shadcn: http://localhost:8081/shadcn/admin/show/product/1
+ * - bootstrap: http://localhost:8081/
+ * - shadcn: http://localhost:8081/shadcn/
  *
  * Each theme gets its own container: bundles flagged with its name in config/bundles.php, configuration of
  * config/packages/{theme}/ and templates of templates/themes/{theme}/, which take precedence over templates/.
