@@ -25,7 +25,7 @@ final class DemoApplicationTest extends KernelTestCase
     public function testTheProductShowPageRenders(): void
     {
         $kernel = self::bootKernel();
-        $response = $kernel->handle(Request::create('/admin/show/product/42'));
+        $response = $kernel->handle(Request::create('/'));
         $html = (string) $response->getContent();
 
         self::assertSame(200, $response->getStatusCode(), $html);
@@ -47,13 +47,13 @@ final class DemoApplicationTest extends KernelTestCase
         self::assertStringContainsString('<i class="ti ti-rocket" aria-hidden="true"></i>', $html);
         self::assertStringContainsString('<path d="M12 2 2 7l10 5 10-5-10-5Z"/>', $html);
         self::assertStringContainsString('Rendered by a Twig hook', $html);
-        self::assertStringContainsString('<a href="/shadcn/admin/show/product/42" class="btn">Shadcn</a>', $html);
+        self::assertStringContainsString('<a href="/shadcn/" class="btn">Shadcn</a>', $html);
     }
 
     public function testTheProductShowPageRendersWithTheShadcnTheme(): void
     {
         $kernel = self::bootKernel(['theme' => 'shadcn']);
-        $response = $kernel->handle(Request::create('/shadcn/admin/show/product/42'));
+        $response = $kernel->handle(Request::create('/shadcn/'));
         $html = (string) $response->getContent();
 
         self::assertSame(200, $response->getStatusCode(), $html);
@@ -64,8 +64,8 @@ final class DemoApplicationTest extends KernelTestCase
         self::assertStringContainsString('1,234 in stock', $html);
         self::assertStringContainsString('data-slot="alert"', $html);
         self::assertStringContainsString('Resource Name: Super Gadget 42', $html);
-        self::assertStringContainsString('<a href="/shadcn/admin/show/product/42" class="font-medium hover:underline">Variant B (Red)</a>', $html);
-        self::assertStringContainsString('<a href="/admin/show/product/42"', $html);
+        self::assertStringContainsString('<a href="/shadcn/" class="font-medium hover:underline">Variant B (Red)</a>', $html);
+        self::assertStringContainsString('<a href="/"', $html);
     }
 
     public function testDoctrineMappingIsUsedToGuessFields(): void
