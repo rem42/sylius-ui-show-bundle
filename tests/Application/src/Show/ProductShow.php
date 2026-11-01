@@ -171,7 +171,7 @@ final class ProductShow
                     AssociationField::create('variants')
                         ->setDisplayMode(AssociationField::MODE_INLINE)
                         ->setLabelProperty('name')
-                        ->setRoute('app_product_show', ['id' => 'product.id']),
+                        ->setRoute('app_product_show'),
                 ),
             ),
             Column::create(12)->withChildren(
