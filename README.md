@@ -85,6 +85,16 @@ final class BookShow
 * [Templates, labels & events](docs/customization.md)
 * [Twig reference](docs/reference/twig.md) · [Configuration reference](docs/reference/configuration.md)
 
+## Screenshots
+
+<a href="docs/screenshots/bootstrap.png" target="_blank">
+    <img width="40%" src="docs/screenshots/bootstrap.png" alt="Bootstrap screenshot">
+</a>
+
+<a href="docs/screenshots/shadcn.png" target="_blank">
+    <img width="40%" src="docs/screenshots/shadcn.png" alt="Shadcn screenshot">
+</a>
+
 ## Development
 
 ```bash
