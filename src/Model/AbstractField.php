@@ -37,11 +37,11 @@ abstract class AbstractField extends AbstractElement implements FieldInterface
      *
      * @throws InvalidShowException when the color is not a {@see Color}
      */
-    protected function getColorOption(string $key, ?Color $default = null): ?string
+    protected function getColorOption(string $key): ?string
     {
         $color = $this->getOption($key);
 
-        return $color instanceof Color || \is_string($color) ? Color::normalize($color) : $default?->value;
+        return $color instanceof Color || \is_string($color) ? Color::normalize($color) : null;
     }
 
     /**

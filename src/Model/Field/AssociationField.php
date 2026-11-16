@@ -91,6 +91,6 @@ class AssociationField extends AbstractField
 
     public function getBadgeColor(): string
     {
-        return $this->getColorOption('badge_color', Color::Primary) ?? Color::Primary->value;
+        return $this->getColorOption('badge_color') ?? Color::Primary->value;
     }
 }

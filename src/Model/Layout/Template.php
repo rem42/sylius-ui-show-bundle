@@ -29,9 +29,10 @@ class Template extends CompositeElement
      */
     public function getContext(): array
     {
+        $option = $this->getOption('context');
         $context = [];
 
-        foreach ((array) $this->getOption('context', []) as $key => $value) {
+        foreach (\is_array($option) ? $option : [] as $key => $value) {
             $context[(string) $key] = $value;
         }
 

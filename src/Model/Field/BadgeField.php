@@ -37,7 +37,7 @@ class BadgeField extends AbstractField
 
     public function getDefaultColor(): string
     {
-        return $this->getColorOption('default_color', Color::Secondary) ?? Color::Secondary->value;
+        return $this->getColorOption('default_color') ?? Color::Secondary->value;
     }
 
     public function setOutline(bool $outline = true): static

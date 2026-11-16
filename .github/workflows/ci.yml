@@ -42,6 +42,10 @@ jobs:
                 name: Twig CS Fixer
                 run: vendor/bin/twig-cs-fixer lint
 
+            -
+                name: PHPStan
+                run: vendor/bin/phpstan analyse --memory-limit=-1
+
     tests:
         runs-on: ubuntu-latest
         name: "PHPUnit (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"

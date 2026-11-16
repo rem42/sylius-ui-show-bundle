@@ -60,9 +60,4 @@ class SensitiveField extends AbstractField
 
         return \is_int($visible) ? max(0, $visible) : 0;
     }
-
-    protected static function getDefaultOptions(): array
-    {
-        return ['mode' => self::MODE_BLUR, 'blur_radius' => '5px', 'char' => '*', 'visible' => 0];
-    }
 }

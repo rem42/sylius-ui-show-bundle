@@ -57,10 +57,7 @@ final class Rem42SyliusUiShowExtension extends Extension implements PrependExten
 
     public function prepend(ContainerBuilder $container): void
     {
-        /** @var array<string, class-string> $bundles */
-        $bundles = $container->hasParameter('kernel.bundles') ? $container->getParameter('kernel.bundles') : [];
-
-        if (!isset($bundles['SyliusTwigHooksBundle'])) {
+        if (!$this->isBundleEnabled($container, 'SyliusTwigHooksBundle')) {
             return;
         }
 
@@ -100,15 +97,19 @@ final class Rem42SyliusUiShowExtension extends Extension implements PrependExten
 
     private function getDefaultTheme(ContainerBuilder $container): string
     {
-        /** @var array<string, class-string> $bundles */
-        $bundles = $container->hasParameter('kernel.bundles') ? $container->getParameter('kernel.bundles') : [];
-
         foreach (Configuration::DEFAULT_THEMES_BY_BUNDLE as $bundle => $theme) {
-            if (isset($bundles[$bundle])) {
+            if ($this->isBundleEnabled($container, $bundle)) {
                 return $theme;
             }
         }
 
         return Configuration::DEFAULT_THEME;
+    }
+
+    private function isBundleEnabled(ContainerBuilder $container, string $bundle): bool
+    {
+        $bundles = $container->hasParameter('kernel.bundles') ? $container->getParameter('kernel.bundles') : [];
+
+        return \is_array($bundles) && isset($bundles[$bundle]);
     }
 }

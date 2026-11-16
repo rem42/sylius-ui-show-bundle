@@ -29,7 +29,6 @@ abstract class AbstractElement implements ElementInterface
         private readonly string $name,
         array $options = [],
     ) {
-        $this->addOptions(static::getDefaultOptions());
         $this->addOptions($options);
     }
 
@@ -109,26 +108,14 @@ abstract class AbstractElement implements ElementInterface
 
     public function addClass(string ...$classes): static
     {
-        $current = $this->getClasses();
+        $added = self::splitClasses(implode(' ', $classes));
 
-        foreach ($classes as $class) {
-            foreach (preg_split('/\s+/', trim($class)) ?: [] as $item) {
-                if ('' !== $item && !\in_array($item, $current, true)) {
-                    $current[] = $item;
-                }
-            }
-        }
-
-        $this->attributes['class'] = implode(' ', $current);
-
-        return $this;
+        return $this->setClasses(array_unique([...$this->getClasses(), ...$added]));
     }
 
     public function removeClass(string ...$classes): static
     {
-        $this->attributes['class'] = implode(' ', array_diff($this->getClasses(), $classes));
-
-        return $this;
+        return $this->setClasses(array_diff($this->getClasses(), $classes));
     }
 
     public function getLabel(): string|false|null
@@ -220,23 +207,34 @@ abstract class AbstractElement implements ElementInterface
     }
 
     /**
-     * @return array<string, mixed>
-     */
-    protected static function getDefaultOptions(): array
-    {
-        return [];
-    }
-
-    /**
      * @return list<string>
      */
     private function getClasses(): array
     {
         $class = $this->attributes['class'] ?? '';
 
-        return array_values(array_filter(
-            preg_split('/\s+/', \is_string($class) ? trim($class) : '') ?: [],
-            static fn (string $item): bool => '' !== $item,
-        ));
+        return \is_string($class) ? self::splitClasses($class) : [];
+    }
+
+    /**
+     * @param array<string> $classes
+     */
+    private function setClasses(array $classes): static
+    {
+        if ([] === $classes) {
+            unset($this->attributes['class']);
+        } else {
+            $this->attributes['class'] = implode(' ', $classes);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private static function splitClasses(string $classes): array
+    {
+        return preg_split('/\s+/', $classes, -1, \PREG_SPLIT_NO_EMPTY) ?: [];
     }
 }

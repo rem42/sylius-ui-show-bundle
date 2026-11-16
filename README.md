@@ -99,7 +99,7 @@ final class BookShow
 
 ```bash
 make install   # composer install
-make ci        # ECS + PHPStan (level max) + PHPUnit
+make ci        # PHP CS Fixer + Twig CS Fixer + PHPStan (level max) + PHPUnit
 make up        # demo application showcasing every element, in both themes:
                # http://localhost:8080/ (bootstrap)
                # http://localhost:8080/shadcn/ (shadcn)

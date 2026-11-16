@@ -1,4 +1,4 @@
-.PHONY: install test analyse ecs fix phpstan ci up assets down bash console
+.PHONY: up assets down bash console install test phpstan cs cs-fix twig-cs twig-fix ci
 
 DC = docker compose
 PHP = $(DC) exec php
@@ -33,8 +33,17 @@ test:
 phpstan:
 	$(PHP) vendor/bin/phpstan analyse --memory-limit=-1
 
+cs:
+	$(PHP) vendor/bin/php-cs-fixer check --diff
+
 cs-fix:
-	$(PHP) php vendor/bin/php-cs-fixer fix
+	$(PHP) vendor/bin/php-cs-fixer fix
+
+twig-cs:
+	$(PHP) vendor/bin/twig-cs-fixer lint
 
 twig-fix:
-	$(PHP) php vendor/bin/twig-cs-fixer --fix
+	$(PHP) vendor/bin/twig-cs-fixer lint --fix
+
+## Everything the CI checks
+ci: cs twig-cs phpstan test

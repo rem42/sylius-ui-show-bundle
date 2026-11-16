@@ -73,16 +73,19 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": false,
             "phpstan/extension-installer": true
         }
     },
     "scripts": {
         "analyse": [
-            "@php vendor/bin/ecs check",
+            "@php vendor/bin/php-cs-fixer check --diff",
+            "@php vendor/bin/twig-cs-fixer lint",
             "@php vendor/bin/phpstan analyse --memory-limit=-1"
         ],
-        "fix": "@php vendor/bin/ecs check --fix",
+        "fix": [
+            "@php vendor/bin/php-cs-fixer fix",
+            "@php vendor/bin/twig-cs-fixer lint --fix"
+        ],
         "test": "@php vendor/bin/phpunit"
     }
 }
